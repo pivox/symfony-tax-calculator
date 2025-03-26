@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Calculateur d'impôt{% endblock %}</title>
+
+    {# CSS compilé #}
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<main class="container mt-5">
+    {% block body %}{% endblock %}
+</main>
+
+{# JS compilé #}
+
+{% block javascripts %}
+    <script type="module" src="/build/app.js"></script>
+{% endblock %}
+</body>
+</html>

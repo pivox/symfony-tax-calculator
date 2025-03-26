@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tax Calculator (UK){% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">UK Income Tax Calculator</h1>
+
+    <div data-controller="tax">
+        <form data-action="submit->tax#submit" class="row g-2">
+            <div class="col-auto">
+                <input type="number" data-tax-target="salary" class="form-control" placeholder="Gross annual salary (£)" required />
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Calculate</button>
+            </div>
+        </form>
+
+        <div data-tax-target="results" class="mt-4"></div>
+    </div>
+{% endblock %}
