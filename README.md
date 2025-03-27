@@ -10,7 +10,7 @@ It supports dynamic tax band configuration and real-time salary breakdown comput
 - Uses configurable tax bands (YAML or database)
 - Hexagonal architecture with DDD principles
 - Clear separation between read (Query) and write (Command) models
-- REST API with GET and POST endpoints
+- REST API with GET endpoint
 - Frontend built with Stimulus.js and Bootstrap 5
 - Dockerized environment for consistent local development
 - Unit and functional tests with PHPUnit
@@ -40,9 +40,9 @@ It supports dynamic tax band configuration and real-time salary breakdown comput
 | Custom bootstrap script | Manual loading of `.env` for test env    |
 
 ## Project Structure
-
-src/ 
-├── Application/ │ 
+```
+src/
+├── Application/ 
 ├── Command/ 
 │ └── Query/ 
 ├── Domain/ 
@@ -55,6 +55,7 @@ src/
 ├── Functional/ 
 │ └── TaxApiTest.php 
 ├── bootstrap.php
+```
 
 ## Installation
 
@@ -96,19 +97,11 @@ After installation, you can access the application from your browser:
 
 - **Frontend Interface**:  
   Accessible at [http://localhost:8080](http://localhost:8080)  
-  This page includes a salary input form powered by Stimulus.js and styled with Bootstrap. It submits a POST request to the backend and dynamically renders the results.
+  This page includes a salary input form powered by Stimulus.js and styled with Bootstrap. It submits a get request to the backend and dynamically renders the results.
 
 - **API Endpoints**:
   - `GET /api/tax/{salary}`  
     Returns a salary breakdown in JSON format based on the value in the URL.
-  
-  - `POST /api/tax`  
-    Accepts a JSON payload with a `salary` value. Example request:
-    ```bash
-    curl -X POST http://localhost:8080/api/tax \
-         -H 'Content-Type: application/json' \
-         -d '{ "salary": 40000 }'
-    ```
   
   - `GET /healthcheck`  
     Basic endpoint to verify the application is running. Returns HTTP 200.
@@ -129,7 +122,7 @@ Example JSON response:
 ### Workflow
 
 1. `app.js` loads Bootstrap styles and registers the Stimulus controllers.
-2. `tax_controller.js` listens to the form submission, sends a POST request, and displays the result dynamically.
+2. `tax_controller.js` listens to the form submission, sends a GET request, and displays the result dynamically.
 3. The final JavaScript bundle is compiled by `yarn encore dev` and placed in `public/build`.
 
 ### Example: app.js
@@ -149,13 +142,14 @@ application.register('tax', TaxController);
 This project follows a layered testing approach, aligned with its hexagonal architecture. It includes both **unit tests** for domain logic and **functional tests** for HTTP endpoints.
 
 ### Test Structure
-
+```
 tests/
 ├── Functional/
 │   └── TaxApiTest.php       # API tests using Symfony's WebTestCase
 ├── Unit/
 │   └── SalaryBreakdownTest.php  # Pure domain logic
 ├── bootstrap.php            # Loads .env if needed
+```
 
 ### Functional Tests
 

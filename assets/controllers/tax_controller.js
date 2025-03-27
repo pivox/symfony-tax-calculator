@@ -9,10 +9,9 @@ export default class extends Controller {
 
         const salary = parseFloat(this.salaryTarget.value)
 
-        const response = await fetch('/api/tax', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ salary })
+        const response = await fetch('/api/tax/'+salary, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
         })
 
         const data = await response.json()

@@ -10,13 +10,13 @@ class TaxApiTest extends WebTestCase
     {
         $client = static::createClient();
 
+        $salary = 40000;
         $client->request(
-            'POST',
-            'api/tax',
+            'GET',
+            "api/tax/$salary",
             [],
             [],
-            ['CONTENT_TYPE' => 'application/json'],
-            json_encode(['salary' => 40000])
+            ['CONTENT_TYPE' => 'application/json']
         );
 
         $this->assertResponseIsSuccessful();
