@@ -1,61 +1,51 @@
 <?php
 
-namespace App\Domain\Model;
+    namespace App\Domain\Model;
 
-class SalaryBreakdown
-{
-    public function __construct(
-        private float $grossAnnual,
-        private float $netAnnual,
-        private float $taxAnnual
-    ) {}
-
-    public function getGrossAnnual(): float
+    readonly class SalaryBreakdown
     {
-        return $this->grossAnnual;
-    }
+        public function __construct(
+            private float $grossAnnual,
+            private float $netAnnual,
+            private float $taxAnnual
+        ) {}
 
-    public function getNetAnnual(): float
-    {
-        return $this->netAnnual;
-    }
-
-    public function getTaxAnnual(): float
-    {
-        return $this->taxAnnual;
-    }
-
-    public function getGrossMonthly(): float
-    {
-        return $this->grossAnnual / 12;
-    }
-
-    public function getNetMonthly(): float
-    {
-        return $this->netAnnual / 12;
-    }
-
-    public function getMonthlyTax(): float
-    {
-        return $this->taxAnnual / 12;
-    }
-
-    public function getTaxRatio(): float
-    {
-        if ($this->grossAnnual === 0.0) {
-            return 0.0;
+        public function getGrossAnnual(): float
+        {
+            return round($this->grossAnnual, 3);
         }
 
-        return $this->taxAnnual / $this->grossAnnual;
-    }
+        public function getNetAnnual(): float
+        {
+            return round($this->netAnnual, 3);
+        }
 
-    public function isTaxFree(): bool
-    {
-        return $this->taxAnnual === 0.0;
-    }
+        public function getTaxAnnual(): float
+        {
+            return round($this->taxAnnual, 3);
+        }
 
-    public function isHighTaxed(float $threshold = 0.3): bool
-    {
-        return $this->getTaxRatio() >= $threshold;
+        public function getGrossMonthly(): float
+        {
+            return round($this->grossAnnual / 12, 3);
+        }
+
+        public function getNetMonthly(): float
+        {
+            return round($this->netAnnual / 12, 3);
+        }
+
+        public function getMonthlyTax(): float
+        {
+            return round($this->taxAnnual / 12, 3);
+        }
+
+        public function getTaxRatio(): float
+        {
+            if ($this->grossAnnual === 0.0) {
+                return 0.0;
+            }
+
+            return round($this->taxAnnual / $this->grossAnnual, 3);
+        }
     }
-}

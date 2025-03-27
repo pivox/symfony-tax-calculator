@@ -28,6 +28,16 @@ class TaxApiTest extends WebTestCase
         $this->assertArrayHasKey('tax_annual', $responseData);
         $this->assertArrayHasKey('net_monthly', $responseData);
         $this->assertArrayHasKey('monthly_tax', $responseData);
+
+        $this->assertEquals(40000, $responseData['gross_annual']);
+        $this->assertEquals(29000, $responseData['net_annual']);
+        $this->assertEquals(11000, $responseData['tax_annual']);
+
+        $this->assertEquals(3333.333, $responseData['gross_monthly']);
+        $this->assertEquals(2416.667, $responseData['net_monthly']);
+        $this->assertEquals(916.667, $responseData['monthly_tax']);
+
+        $this->assertEquals('27.5%', $responseData['tax_ratio']);
     }
 
     public function testEnvVariableIsLoaded(): void
